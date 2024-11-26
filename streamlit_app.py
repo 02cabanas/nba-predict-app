@@ -395,6 +395,7 @@ elif st.session_state.page == "Over/Under Visuals":
 
     # 10-Point Section
     st.subheader("10-Point Threshold")
+    st.image("over_under_visuals/10_kpi.png", caption="Model KPI's for 10-Point Threshold")
     st.image("over_under_visuals/10_accuracy.png", caption="Accuracy for 10-Point Threshold")
     st.markdown("This chart shows the prediction outcomes (correct and incorrect) for a 10-point threshold on the test set.")
     st.image("over_under_visuals/10_feature_imp.png", caption="Feature Importances for 10-Point Threshold")
@@ -403,6 +404,7 @@ elif st.session_state.page == "Over/Under Visuals":
 
     # 20-Point Section
     st.subheader("20-Point Threshold")
+    st.image("over_under_visuals/20_kpi.png", caption="Model KPI's for 20-Point Threshold")
     st.image("over_under_visuals/20_accuracy.png", caption="Accuracy for 20-Point Threshold")
     st.markdown("This chart shows the prediction outcomes (correct and incorrect) for a 20-point threshold on the test set.")
     st.image("over_under_visuals/20_feature_imp.png", caption="Feature Importances for 20-Point Threshold")
@@ -412,6 +414,7 @@ elif st.session_state.page == "Over/Under Visuals":
 
     # 30-Point Section
     st.subheader("30-Point Threshold")
+    st.image("over_under_visuals/30_kpi.png", caption="Model KPI's for 30-Point Threshold")
     st.image("over_under_visuals/30_accuracy.png", caption="Accuracy for 30-Point Threshold")
     st.markdown("This chart shows the prediction outcomes (correct and incorrect) for a 30-point threshold on the test set."
                 "we see that the higher the point threshold it seems the more accurate the model is in its prediction.")
