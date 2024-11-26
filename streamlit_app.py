@@ -259,7 +259,8 @@ home_button = st.sidebar.button("Home")
 prediction_button = st.sidebar.button("Win/Loss Predictor")
 data_insights_button = st.sidebar.button("Data Insights")
 about_button = st.sidebar.button("About")
-test_button = st.sidebar.button("fredo test")
+over_under_button = st.sidebar.button("Over/Under Predictor")
+over_under_visuals_button = st.sidebar.button("Over/Under Visuals")
 
 # Set default page if no button is pressed
 if "page" not in st.session_state:
@@ -274,6 +275,10 @@ elif data_insights_button:
     st.session_state.page = "Data Insights"
 elif about_button:
     st.session_state.page = "About"
+elif over_under_button:
+    st.session_state.page = "Over/Under Predictor"
+elif over_under_visuals_button:
+    st.session_state.page = "Over/Under Visuals"
 
 # Render the selected page
 if st.session_state.page == "Home":
@@ -292,6 +297,8 @@ Brandon Rodriguez<br>
 Alfredo<br>
 Abel<br>
 """, unsafe_allow_html=True)
+    
+
 
 elif st.session_state.page == "Prediction":
     st.title("Make a Prediction")
@@ -312,3 +319,97 @@ elif st.session_state.page == "About":
     st.title("About")
     st.write("This app predicts NBA game outcomes.")
 
+
+
+elif st.session_state.page == "Over/Under Predictor":
+    st.title("Over/Under Predictor")
+
+    with st.form("over_under_form"):
+        player = st.text_input("Enter Player Name:")
+        team1 = st.text_input("Enter Team 1 Abbreviation (Player's Team):")
+        team2 = st.text_input("Enter Team 2 Abbreviation (Opponent):")
+        game_date = st.date_input("Enter Game Date:")
+        points = st.number_input("Enter Points Threshold:", min_value=0, step=1, value=20)
+        submit = st.form_submit_button("Predict Over/Under")
+
+    if submit:
+        if not all([player, team1, team2, game_date, points]):
+            st.error("Please fill in all the fields.")
+        else:
+            # Construct the command to call your model
+            command = f"python3 over_under.py predict --player \"{player}\" --team1 \"{team1}\" --team2 \"{team2}\" --date \"{game_date}\" --points {int(points)}"
+            
+            # Use subprocess to run the command
+            try:
+                result = subprocess.run(command, shell=True, capture_output=True, text=True)
+                if result.returncode == 0:
+                    st.success("Prediction Complete!")
+                    st.text(result.stdout)
+                else:
+                    st.error("Error in prediction.")
+                    st.text(result.stderr)
+            except Exception as e:
+                st.error(f"An error occurred: {e}")
+
+    st.subheader("Team Abbreviations")
+    st.markdown("""
+    Here are common NBA team abbreviations:
+    - **Atlanta Hawks** → ATL
+    - **Boston Celtics** → BOS
+    - **Brooklyn Nets** → BKN
+    - **Charlotte Hornets** → CHA
+    - **Chicago Bulls** → CHI
+    - **Cleveland Cavaliers** → CLE
+    - **Dallas Mavericks** → DAL
+    - **Denver Nuggets** → DEN
+    - **Detroit Pistons** → DET
+    - **Golden State Warriors** → GSW
+    - **Houston Rockets** → HOU
+    - **Indiana Pacers** → IND
+    - **LA Clippers** → LAC
+    - **Los Angeles Lakers** → LAL
+    - **Memphis Grizzlies** → MEM
+    - **Miami Heat** → MIA
+    - **Milwaukee Bucks** → MIL
+    - **Minnesota Timberwolves** → MIN
+    - **New Orleans Pelicans** → NOP
+    - **New York Knicks** → NYK
+    - **Oklahoma City Thunder** → OKC
+    - **Orlando Magic** → ORL
+    - **Philadelphia 76ers** → PHI
+    - **Phoenix Suns** → PHX
+    - **Portland Trail Blazers** → POR
+    - **Sacramento Kings** → SAC
+    - **San Antonio Spurs** → SAS
+    - **Toronto Raptors** → TOR
+    - **Utah Jazz** → UTA
+    - **Washington Wizards** → WAS
+    """)
+
+elif st.session_state.page == "Over/Under Visuals":
+    st.title("Over/Under Visuals")
+    st.markdown(
+        "These visuals show the accuracy and feature importances for predicting over/under thresholds for player points. "
+        "Each section corresponds to predictions for a specific point threshold (10, 20, and 30)."
+    )
+
+    # 10-Point Section
+    st.subheader("10-Point Threshold")
+    st.image("over_under_visuals/10-point-accuracy-over-under.png", caption="Accuracy for 10-Point Threshold")
+    st.markdown("This chart shows the prediction outcomes (correct and incorrect) for the 10-point threshold.")
+    st.image("over_under_visuals/10-point-feature-importances-over-under.png", caption="Feature Importances for 10-Point Threshold")
+    st.markdown("This chart shows the most important features contributing to predictions for the 10-point threshold.")
+
+    # 20-Point Section
+    st.subheader("20-Point Threshold")
+    st.image("over_under_visuals/20-point-accuracy-over-under.png", caption="Accuracy for 20-Point Threshold")
+    st.markdown("This chart shows the prediction outcomes (correct and incorrect) for the 20-point threshold.")
+    st.image("over_under_visuals/20-point-feature-importances-over-under.png", caption="Feature Importances for 20-Point Threshold")
+    st.markdown("This chart shows the most important features contributing to predictions for the 20-point threshold.")
+
+    # 30-Point Section
+    st.subheader("30-Point Threshold")
+    st.image("over_under_visuals/30-point-accuracy-over-under.png", caption="Accuracy for 30-Point Threshold")
+    st.markdown("This chart shows the prediction outcomes (correct and incorrect) for the 30-point threshold.")
+    st.image("over_under_visuals/30-point-feature-importances-over-under.png", caption="Feature Importances for 30-Point Threshold")
+    st.markdown("This chart shows the most important features contributing to predictions for the 30-point threshold.")
