@@ -417,7 +417,7 @@ elif st.session_state.page == "Over/Under Visuals":
     st.image("over_under_visuals/30_kpi.png", caption="Model KPI's for 30-Point Threshold")
     st.image("over_under_visuals/30_accuracy.png", caption="Accuracy for 30-Point Threshold")
     st.markdown("This chart shows the prediction outcomes (correct and incorrect) for a 30-point threshold on the test set."
-                "we see that the higher the point threshold it seems the more accurate the model is in its prediction.")
+                "We see that the higher the point threshold it seems the more accurate the model is in its prediction.")
     st.image("over_under_visuals/30_feature_imp.png", caption="Feature Importances for 30-Point Threshold")
     st.markdown("This chart shows the most important features contributing to predictions for a 30-point threshold."
                 "In this case we also see that for medium points the the player; not the team, is on is more important for wether they will be over/under the low 10-point threshold."
