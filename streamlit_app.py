@@ -389,27 +389,33 @@ elif st.session_state.page == "Over/Under Predictor":
 elif st.session_state.page == "Over/Under Visuals":
     st.title("Over/Under Visuals")
     st.markdown(
-        "These visuals show the accuracy and feature importances for predicting over/under thresholds for player points. "
+        "These visuals show the accuracy and feature importances for predicting over/under on sample thresholds for player points. "
         "Each section corresponds to predictions for a specific point threshold (10, 20, and 30)."
     )
 
     # 10-Point Section
     st.subheader("10-Point Threshold")
-    st.image("over_under_visuals/10-point-accuracy-over-under.png", caption="Accuracy for 10-Point Threshold")
-    st.markdown("This chart shows the prediction outcomes (correct and incorrect) for the 10-point threshold.")
-    st.image("over_under_visuals/10-point-feature-importances-over-under.png", caption="Feature Importances for 10-Point Threshold")
-    st.markdown("This chart shows the most important features contributing to predictions for the 10-point threshold.")
+    st.image("over_under_visuals/10_accuracy.png", caption="Accuracy for 10-Point Threshold")
+    st.markdown("This chart shows the prediction outcomes (correct and incorrect) for a 10-point threshold on the test set.")
+    st.image("over_under_visuals/10_feature_imp.png", caption="Feature Importances for 10-Point Threshold")
+    st.markdown("This chart shows the most important features contributing to predictions for a 10-point threshold."
+                "In this case we see that for low points the team the player is on is more important for wether they will be over/under the low 10-point threshold.")
 
     # 20-Point Section
     st.subheader("20-Point Threshold")
-    st.image("over_under_visuals/20-point-accuracy-over-under.png", caption="Accuracy for 20-Point Threshold")
-    st.markdown("This chart shows the prediction outcomes (correct and incorrect) for the 20-point threshold.")
-    st.image("over_under_visuals/20-point-feature-importances-over-under.png", caption="Feature Importances for 20-Point Threshold")
-    st.markdown("This chart shows the most important features contributing to predictions for the 20-point threshold.")
+    st.image("over_under_visuals/20_accuracy.png", caption="Accuracy for 20-Point Threshold")
+    st.markdown("This chart shows the prediction outcomes (correct and incorrect) for a 20-point threshold on the test set.")
+    st.image("over_under_visuals/20_feature_imp.png", caption="Feature Importances for 20-Point Threshold")
+    st.markdown("This chart shows the most important features contributing to predictions for a 20-point threshold."
+                "In this case we see that for medium points the the player; not the team, is on is more important for wether they will be over/under the low 10-point threshold."
+                "This also gives us insight into the player the model is most confident/decisive in its prediction since the weights are high for these player names.")
 
     # 30-Point Section
     st.subheader("30-Point Threshold")
-    st.image("over_under_visuals/30-point-accuracy-over-under.png", caption="Accuracy for 30-Point Threshold")
-    st.markdown("This chart shows the prediction outcomes (correct and incorrect) for the 30-point threshold.")
-    st.image("over_under_visuals/30-point-feature-importances-over-under.png", caption="Feature Importances for 30-Point Threshold")
-    st.markdown("This chart shows the most important features contributing to predictions for the 30-point threshold.")
+    st.image("over_under_visuals/30_accuracy.png", caption="Accuracy for 30-Point Threshold")
+    st.markdown("This chart shows the prediction outcomes (correct and incorrect) for a 30-point threshold on the test set."
+                "we see that the higher the point threshold it seems the more accurate the model is in its prediction.")
+    st.image("over_under_visuals/30_feature_imp.png", caption="Feature Importances for 30-Point Threshold")
+    st.markdown("This chart shows the most important features contributing to predictions for a 30-point threshold."
+                "In this case we also see that for medium points the the player; not the team, is on is more important for wether they will be over/under the low 10-point threshold."
+                "This also gives us insight into the player the model is most confident/decisive in its prediction since the weights are high for these player names.")
